@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_list/models/login/components/google_button.dart';
-import 'package:groceries_list/models/login/screens/email_login.dart';
+import 'package:groceries_list/modules/login/components/google_button.dart';
+
+import 'email_login.dart';
 
 class GoogleLoginPage extends StatefulWidget {
   const GoogleLoginPage({Key? key}) : super(key: key);
@@ -19,11 +20,11 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
         width: double.infinity,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
-            child: Image.asset('assets/images/splash.png', height: 150),
+            child: Image.asset('assets/images/splash.png', height: 120),
           ),
           const SizedBox(height: 20),
           const Text(
-            'Entrar com:',
+            'Entrar com',
             style: TextStyle(fontSize: 23),
           ),
           const SizedBox(height: 20),
@@ -33,22 +34,22 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.25,
                     height: 1,
-                    color: Colors.grey[300]),
+                    color: Colors.grey[500]),
               ),
               const Text(
                 'OU',
                 style: TextStyle(fontSize: 18),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.25,
                     height: 1,
-                    color: Colors.grey[400]),
+                    color: Colors.grey[500]),
               ),
             ],
           ),

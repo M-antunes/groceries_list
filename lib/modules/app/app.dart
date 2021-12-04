@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_list/models/login/screens/google_login.dart';
+import 'package:groceries_list/modules/splash/splash_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const GoogleLoginPage(),
+      home: const SplashPage(),
     );
   }
 }

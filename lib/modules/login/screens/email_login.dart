@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_list/models/login/components/theme_button.dart';
+import 'package:groceries_list/shared/components/theme_button.dart';
 
 class EmailLogin extends StatefulWidget {
   const EmailLogin({Key? key}) : super(key: key);

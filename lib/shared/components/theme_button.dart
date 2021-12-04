@@ -14,7 +14,7 @@ class ThemeButton extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * buttonWidth,
       decoration: BoxDecoration(
-          color: Colors.green[400], borderRadius: BorderRadius.circular(10)),
+          color: Colors.teal, borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: Center(child: Text(buttonName)),
