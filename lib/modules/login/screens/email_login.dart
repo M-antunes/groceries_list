@@ -50,6 +50,10 @@ class _EmailLoginState extends State<EmailLogin> {
 
     if (_isLogin()) {
       //login
+      await auth.login(
+        _authData['email']!,
+        _authData['password']!,
+      );
     } else {
       // register
       await auth.signUp(
