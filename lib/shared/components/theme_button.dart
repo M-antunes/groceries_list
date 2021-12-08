@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class ThemeButton extends StatelessWidget {
   final double buttonWidth;
   final String buttonName;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Color? color;
   final Color? textColor;
   const ThemeButton({
     Key? key,
     required this.buttonWidth,
     required this.buttonName,
-    required this.onTap,
+    this.onTap,
     this.color,
     this.textColor,
   }) : super(key: key);

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:groceries_list/modules/login/components/google_button.dart';
+import 'package:groceries_list/modules/login/components/login_divider.dart';
 import 'package:groceries_list/shared/constants/app_routes.dart';
 
-class GoogleLoginPage extends StatefulWidget {
-  const GoogleLoginPage({Key? key}) : super(key: key);
+class OptionalLogin extends StatefulWidget {
+  const OptionalLogin({Key? key}) : super(key: key);
 
   @override
-  _GoogleLoginPageState createState() => _GoogleLoginPageState();
+  _OptionalLoginState createState() => _OptionalLoginState();
 }
 
-class _GoogleLoginPageState extends State<GoogleLoginPage> {
+class _OptionalLoginState extends State<OptionalLogin> {
   bool isPasswordVisible = false;
 
   @override
@@ -32,24 +33,12 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    height: 1,
-                    color: Colors.grey[600]),
-              ),
+              const LoginDivider(),
               Text(
                 'OU',
                 style: TextStyle(fontSize: 18, color: Colors.grey[600]),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    height: 1,
-                    color: Colors.grey[600]),
-              ),
+              const LoginDivider(),
             ],
           ),
           const SizedBox(height: 20),

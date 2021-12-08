@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:groceries_list/Modules/login/screens/google_login.dart';
+import 'package:groceries_list/modules/login/screens/optional_login.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 4), () {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const GoogleLoginPage()));
+          MaterialPageRoute(builder: (context) => const OptionalLogin()));
     });
 
     return Scaffold(
