@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:groceries_list/modules/login/components/google_button.dart';
-
-import 'email_login.dart';
+import 'package:groceries_list/shared/constants/app_routes.dart';
 
 class GoogleLoginPage extends StatefulWidget {
   const GoogleLoginPage({Key? key}) : super(key: key);
@@ -38,18 +37,18 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
                 child: Container(
                     width: MediaQuery.of(context).size.width * 0.25,
                     height: 1,
-                    color: Colors.grey[500]),
+                    color: Colors.grey[600]),
               ),
-              const Text(
+              Text(
                 'OU',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Colors.grey[600]),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Container(
                     width: MediaQuery.of(context).size.width * 0.25,
                     height: 1,
-                    color: Colors.grey[500]),
+                    color: Colors.grey[600]),
               ),
             ],
           ),
@@ -71,10 +70,7 @@ class _GoogleLoginPageState extends State<GoogleLoginPage> {
               ),
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const EmailLogin()),
-              );
+              Navigator.pushNamed(context, AppRoutes.emailLogin);
             },
           ),
         ]),

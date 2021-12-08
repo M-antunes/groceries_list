@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_list/shared/components/general_text_form.dart';
 import 'package:groceries_list/shared/components/theme_button.dart';
 
 class EmailLogin extends StatefulWidget {
@@ -10,102 +11,118 @@ class EmailLogin extends StatefulWidget {
 
 class _EmailLoginState extends State<EmailLogin> {
   bool isPasswordVisible = false;
+  final _formKey = GlobalKey<FormState>();
+  final Map<String, String> _authData = {
+    'name': '',
+    'email': '',
+    'password': '',
+  };
+  final TextEditingController passwordController = TextEditingController();
+
+  void _submit() {
+    final isValid = _formKey.currentState?.validate() ?? false;
+    if (!isValid) {
+      return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: 10),
-          biuldTextForm(
-            context,
-            'Nome',
-            Icons.person,
-            TextInputType.name,
-            const SizedBox(
-              width: 1,
-            ),
-            false,
-          ),
-          const SizedBox(height: 10),
-          biuldTextForm(
-            context,
-            'Email',
-            Icons.email,
-            TextInputType.emailAddress,
-            const SizedBox(
-              width: 1,
-            ),
-            false,
-          ),
-          const SizedBox(height: 10),
-          biuldTextForm(
-            context,
-            'Senha ',
-            Icons.lock,
-            TextInputType.visiblePassword,
-            InkWell(
-              child: isPasswordVisible
-                  ? const Icon(Icons.visibility_off_outlined, size: 28)
-                  : const Icon(Icons.visibility_outlined, size: 28),
-              onTap: () {
-                setState(() {
-                  isPasswordVisible = !isPasswordVisible;
-                });
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GeneralTextForm(
+              text: 'Nome',
+              icon: Icons.person,
+              inputText: TextInputType.name,
+              hidePassword: false,
+              sufIcon: const SizedBox(width: 1),
+              onSaved: (name) => _authData['name'] = name ?? '',
+              validator: (_name) {
+                final name = _name ?? '';
+                if (name.length < 3) {
+                  return 'Nome muito curto. Mínimo de 3 digitos.';
+                }
+                return null;
               },
             ),
-            isPasswordVisible ? false : true,
-          ),
-          const SizedBox(height: 20),
-          biuldTextForm(
-            context,
-            'Confirmar Senha',
-            Icons.lock,
-            TextInputType.visiblePassword,
-            InkWell(
-              child: isPasswordVisible
-                  ? const Icon(Icons.visibility_off_outlined, size: 28)
-                  : const Icon(Icons.visibility_outlined, size: 28),
-              onTap: () {
-                setState(() {
-                  isPasswordVisible = !isPasswordVisible;
-                });
+            const SizedBox(height: 15),
+            GeneralTextForm(
+              text: 'Email',
+              icon: Icons.email_outlined,
+              inputText: TextInputType.emailAddress,
+              hidePassword: false,
+              sufIcon: const SizedBox(width: 1),
+              onSaved: (email) => _authData['email'] = email ?? '',
+              validator: (_email) {
+                final email = _email ?? '';
+                if (email.trim().isEmpty || !email.contains('@')) {
+                  return 'Por favor informe um email válido.';
+                }
+                return null;
               },
             ),
-            isPasswordVisible ? false : true,
-          ),
-          const SizedBox(height: 20),
-          const ThemeButton(
-            buttonName: 'Cadastrar',
-            buttonWidth: 0.3,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Align biuldTextForm(BuildContext context, String text, IconData icon,
-      TextInputType inputText, Widget sufIcon, bool hidePassword) {
-    return Align(
-      alignment: Alignment.center,
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.7,
-        child: TextFormField(
-          obscureText: hidePassword,
-          cursorHeight: 28,
-          keyboardType: inputText,
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(color: Colors.green[400]!),
+            const SizedBox(height: 15),
+            GeneralTextForm(
+              text: 'Senha',
+              icon: Icons.lock,
+              inputText: TextInputType.visiblePassword,
+              hidePassword: true,
+              textController: passwordController,
+              sufIcon: InkWell(
+                child: isPasswordVisible
+                    ? const Icon(Icons.visibility_off_outlined, size: 28)
+                    : const Icon(Icons.visibility_outlined, size: 28),
+                onTap: () {
+                  setState(() {
+                    isPasswordVisible = !isPasswordVisible;
+                  });
+                },
+              ),
+              onSaved: (password) => _authData['password'] = password ?? '',
+              validator: (_password) {
+                final password = _password ?? '';
+                if (password.trim().isEmpty || password.length < 6) {
+                  return 'Senha muito curta. Mínimo de 6 digitos.';
+                }
+                return null;
+              },
             ),
-            labelText: text,
-            labelStyle: const TextStyle(fontSize: 12),
-            icon: Icon(icon, size: 28),
-            suffixIcon: sufIcon,
-          ),
-          style: const TextStyle(fontSize: 12),
+            const SizedBox(height: 15),
+            GeneralTextForm(
+              text: 'Confirmar Senha',
+              icon: Icons.lock,
+              inputText: TextInputType.visiblePassword,
+              hidePassword: true,
+              sufIcon: InkWell(
+                child: isPasswordVisible
+                    ? const Icon(Icons.visibility_off_outlined, size: 28)
+                    : const Icon(Icons.visibility_outlined, size: 28),
+                onTap: () {
+                  setState(() {
+                    isPasswordVisible = !isPasswordVisible;
+                  });
+                },
+              ),
+              validator: (_password) {
+                final password = _password ?? '';
+                if (password != passwordController.text) {
+                  return 'Senhas informadas são diferentes';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 30),
+            ThemeButton(
+              buttonName: 'Cadastrar',
+              textColor: Colors.white,
+              buttonWidth: 0.3,
+              onTap: _submit,
+            ),
+          ],
         ),
       ),
     );
