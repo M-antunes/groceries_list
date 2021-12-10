@@ -3,6 +3,7 @@ import 'package:groceries_list/modules/page_2/page_2.dart';
 import 'package:groceries_list/modules/page_3/page_3.dart';
 
 import 'package:flutter/material.dart';
+import 'package:groceries_list/shared/models/purchase_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

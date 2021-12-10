@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:groceries_list/modules/login/screens/optional_login.dart';
+import 'package:groceries_list/modules/home/screens/home.dart';
+import 'package:groceries_list/modules/login_or_home/login_or_home.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -9,8 +10,8 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 4), () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const OptionalLogin()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     });
 
     return Scaffold(

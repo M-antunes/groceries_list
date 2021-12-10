@@ -9,7 +9,7 @@ class Percent extends StatelessWidget {
   _percentCount() {
     double itemCount = 0;
     for (var i = 0; i < countingForPercent.length; i++) {
-      if (countingForPercent[i].selected == true) {
+      if (countingForPercent[i].isSelected == true) {
         itemCount++;
       }
     }

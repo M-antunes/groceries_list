@@ -3,6 +3,7 @@ import 'package:groceries_list/shared/auth/auth.dart';
 import 'package:groceries_list/shared/components/app_snack_bar.dart';
 import 'package:groceries_list/shared/components/general_text_form.dart';
 import 'package:groceries_list/shared/components/theme_button.dart';
+import 'package:groceries_list/shared/exceptions/auth_exceptions.dart';
 import 'package:provider/provider.dart';
 
 enum AuthMode { login, signUp }
@@ -19,15 +20,14 @@ class _EmailLoginState extends State<EmailLogin> {
   bool isLoading = false;
   AuthMode _authMode = AuthMode.login;
   final _formKey = GlobalKey<FormState>();
+  bool _isLogin() => _authMode == AuthMode.login;
+  bool _isSignUp() => _authMode == AuthMode.signUp;
   final TextEditingController passwordController = TextEditingController();
   final Map<String, String> _authData = {
     // 'name': '',
     'email': '',
     'password': '',
   };
-
-  bool _isLogin() => _authMode == AuthMode.login;
-  bool _isSignUp() => _authMode == AuthMode.signUp;
 
   void switchAuthMode() {
     setState(() {
@@ -48,21 +48,35 @@ class _EmailLoginState extends State<EmailLogin> {
     _formKey.currentState?.save();
     Auth auth = Provider.of(context, listen: false);
 
-    if (_isLogin()) {
-      //login
-      await auth.login(
-        _authData['email']!,
-        _authData['password']!,
-      );
-    } else {
-      // register
-      await auth.signUp(
-        _authData['email']!,
-        _authData['password']!,
-      );
+    try {
+      if (_isLogin()) {
+        //login
+        await auth.login(
+          _authData['email']!,
+          _authData['password']!,
+        );
+        showSuccessMessage();
+      } else {
+        // register
+        await auth.signUp(
+          _authData['email']!,
+          _authData['password']!,
+        );
+        showSuccessMessage();
+      }
+    } on AuthExceptions catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          getAppSnackBar(message: error.toString(), type: SnackBarType.error));
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(getAppSnackBar(
+          message: 'Não foi possível realizar essa ação. Tente mais tarde.',
+          type: SnackBarType.error));
     }
     setState(() => isLoading = false);
+  }
 
+  void showSuccessMessage() {
+    setState(() => isLoading = false);
     ScaffoldMessenger.of(context).showSnackBar(getAppSnackBar(
         message: 'Usuário cadastrado com sucesso.',
         type: SnackBarType.success));

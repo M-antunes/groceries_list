@@ -1,13 +1,13 @@
 import 'dart:math';
 
 class Item {
-  String? id;
-  String name;
+  final String? id;
+  final String name;
   int quantity;
-  String? price;
-  String type;
-  String section;
-  bool selected;
+  final double? price;
+  final String type;
+  final String section;
+  bool isSelected;
 
   Item({
     this.id,
@@ -16,8 +16,12 @@ class Item {
     this.price,
     required this.type,
     required this.section,
-    this.selected = false,
+    this.isSelected = false,
   });
+
+  void toggleSelection() {
+    isSelected = !isSelected;
+  }
 
   static List<Item> generateList() {
     return [
